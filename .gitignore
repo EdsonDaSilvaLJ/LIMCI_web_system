@@ -1,1 +1,41 @@
- 
+# Python / Django
+__pycache__/
+*.py[cod]
+*.sqlite3
+db.sqlite3
+.venv/
+venv/
+media/
+staticfiles/
+
+# JavaScript / React
+node_modules/
+dist/
+build/
+coverage/
+
+# Ambientes e segredos
+.env
+.env.*
+!.env.example
+
+# Notebooks
+.ipynb_checkpoints/
+
+# IDE e sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Datasets e artefatos de ML
+datasets/
+data/
+*.keras
+*.h5
+*.hdf5
+*.ckpt
+*.pth
+*.pt
+model_weights/*
+!model_weights/README.md
