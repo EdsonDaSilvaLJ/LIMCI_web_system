@@ -1,1 +1,44 @@
-# LIMCI_web_system
+# LIMCI Web System
+
+Protótipo desenvolvido no contexto de uma **Iniciação Tecnológica (I.T.)** para integrar modelos de visão computacional aplicados à análise de imagens patológicas.
+
+## Escopo da primeira entrega
+
+A aplicação será organizada como um monólito modular com dois módulos independentes:
+
+- **Renal:** segmentação de glomérulos com U-Net/VGG-19, produzindo máscara, sobreposição e medidas derivadas.
+- **LLA-B:** classificação binária de imagens recortadas de células sanguíneas em **normal** ou **maligna**, usando transferência de aprendizado com EfficientNet-B0.
+
+O módulo de LLA-B utiliza imagens celulares já recortadas do conjunto público C-NMC 2019. A primeira versão não processa lâminas inteiras (WSI) e não substitui a avaliação de profissionais qualificados.
+
+## Arquitetura prevista
+
+- Frontend: React
+- Backend: Django + Django Ninja
+- Banco de dados: PostgreSQL
+- Treinamento experimental: Google Colab
+- Modelos: TensorFlow/Keras
+
+## Estrutura do repositório
+
+```text
+backend/        API, persistência e módulos de inferência
+frontend/       interface web
+notebooks/      auditoria, treinamento e avaliação
+docs/           arquitetura e documentação acadêmica
+model_weights/  instruções; pesos não são versionados
+```
+
+## Experimento C-NMC 2019
+
+A separação definida preserva os pacientes entre os conjuntos:
+
+- treinamento: 7.108 imagens;
+- validação: 3.553 imagens;
+- teste preliminar: 1.867 imagens.
+
+Datasets e pesos dos modelos não são armazenados neste repositório.
+
+## Estado atual
+
+Estrutura inicial do projeto em preparação. Código, experimentos e resultados serão adicionados progressivamente durante a I.T.
