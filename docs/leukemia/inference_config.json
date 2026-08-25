@@ -1,0 +1,30 @@
+{
+  "model_name": "EfficientNet-B0",
+  "task": "binary_cell_classification",
+  "input_scope": "Imagem recortada de uma célula sanguínea",
+  "image_size": [
+    224,
+    224
+  ],
+  "channels": 3,
+  "color_mode": "RGB",
+  "input_dtype": "float32",
+  "input_pixel_range": [
+    0,
+    255
+  ],
+  "external_normalization": false,
+  "normalization": "Rescaling interno da EfficientNet-B0",
+  "resize_method": "bilinear_antialias",
+  "augmentation_during_inference": false,
+  "class_mapping": {
+    "0": "normal",
+    "1": "malignant"
+  },
+  "positive_class": "malignant",
+  "decision_threshold": 0.5,
+  "threshold_selection": "Fixed threshold 0.5; sensitivity-prioritized proof of concept",
+  "dataset": "C-NMC 2019",
+  "selected_checkpoint": "finetuned",
+  "tensorflow_version": "2.20.0"
+}

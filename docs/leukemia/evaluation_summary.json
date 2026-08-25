@@ -1,0 +1,51 @@
+{
+  "selected_model": "finetuned",
+  "model_selection_metric": "validation_auc",
+  "validation_metrics": {
+    "accuracy": 0.7908809185028076,
+    "auc": 0.8015904426574707,
+    "loss": 0.48402392864227295,
+    "precision": 0.7942994236946106,
+    "recall": 0.9413919448852539
+  },
+  "selected_threshold": 0.5,
+  "threshold_selection": "Fixed threshold 0.5; sensitivity-prioritized proof of concept",
+  "test_metrics": {
+    "threshold": 0.5,
+    "accuracy": 0.6754151044456347,
+    "precision": 0.6780941313190005,
+    "recall_sensitivity": 0.9573420836751435,
+    "specificity": 0.14506172839506173,
+    "balanced_accuracy": 0.5512019060351027,
+    "f1": 0.7938775510204081,
+    "auc": 0.6376330527957546,
+    "tn": 94,
+    "fp": 554,
+    "fn": 52,
+    "tp": 1167
+  },
+  "majority_class_baseline_accuracy": 0.6529191215854312,
+  "probability_summary_by_class": {
+    "malignant": {
+      "count": 1219.0,
+      "mean": 0.8213331699,
+      "std": 0.1437218934,
+      "min": 0.0948373005,
+      "25%": 0.7663250566,
+      "50%": 0.8645740747,
+      "75%": 0.9241707325,
+      "max": 0.9882981181
+    },
+    "normal": {
+      "count": 648.0,
+      "mean": 0.730109334,
+      "std": 0.215800032,
+      "min": 0.0480953567,
+      "25%": 0.6568994075,
+      "50%": 0.8050755262,
+      "75%": 0.8823945075,
+      "max": 0.9781412482
+    }
+  },
+  "model_sha256": "fbad2b1ea8337d8d5b6b09ba4a4ea6da85528cbfabff5cd521fe2185c08e91d8"
+}
