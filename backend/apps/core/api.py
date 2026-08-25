@@ -1,3 +1,6 @@
+from pathlib import Path
+
+from django.conf import settings
 from ninja import Router
 
 from .schemas import HealthResponse, ModuleResponse
@@ -33,7 +36,11 @@ def list_modules(request):
             "slug": "leukemia",
             "name": "Classificação de LLA-B",
             "task": "classification",
-            "status": "integration_pending",
+            "status": (
+                "available"
+                if Path(settings.LEUKEMIA_MODEL_PATH).is_file()
+                else "integration_pending"
+            ),
             "input_scope": "Imagem recortada de uma célula sanguínea",
         },
     ]

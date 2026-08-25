@@ -20,3 +20,14 @@ Integrar, em uma única aplicação acadêmica, dois modelos com tarefas diferen
 - o classificador de LLA-B recebe uma célula já recortada;
 - não haverá segmentação celular antes da classificação nesta etapa;
 - os resultados têm finalidade experimental e não representam diagnóstico clínico.
+
+## Fluxo implementado para LLA-B
+
+1. a API recebe o upload de uma imagem celular;
+2. o arquivo é validado e convertido para RGB;
+3. a imagem é redimensionada para `224 × 224` e mantida no intervalo
+   `0–255`, pois a EfficientNet-B0 possui reescala interna;
+4. o modelo é carregado uma única vez por processo;
+5. o score de malignidade é comparado ao threshold configurado;
+6. o resultado e o tempo de inferência são registrados em `Analysis`;
+7. a API retorna classe, scores e aviso de uso experimental.

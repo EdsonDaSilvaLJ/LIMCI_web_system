@@ -29,6 +29,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "ninja",
     "apps.core",
+    "apps.analyses",
+    "apps.leukemia",
+    "apps.renal",
 ]
 
 MIDDLEWARE = [
@@ -76,4 +79,36 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
+LEUKEMIA_MODEL_PATH = Path(
+    config(
+        "LEUKEMIA_MODEL_PATH",
+        default=str(
+            BASE_DIR.parent
+            / "model_weights"
+            / "leukemia"
+            / "leukemia_efficientnet_b0.keras"
+        ),
+    )
+)
+LEUKEMIA_INFERENCE_CONFIG_PATH = Path(
+    config(
+        "LEUKEMIA_INFERENCE_CONFIG_PATH",
+        default=str(
+            BASE_DIR.parent
+            / "docs"
+            / "results"
+            / "leukemia"
+            / "inference_config.json"
+        ),
+    )
+)
+MAX_IMAGE_UPLOAD_BYTES = (
+    config("MAX_IMAGE_UPLOAD_MB", default=10, cast=int)
+    * 1024
+    * 1024
+)
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
