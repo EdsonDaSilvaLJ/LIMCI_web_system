@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "ninja",
     "apps.core",
-    "apps.analyses",
     "apps.leukemia",
     "apps.renal",
 ]

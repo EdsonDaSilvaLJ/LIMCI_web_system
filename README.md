@@ -41,4 +41,6 @@ Datasets e pesos dos modelos não são armazenados neste repositório.
 
 ## Estado atual
 
-Estrutura inicial do projeto em preparação. Código, experimentos e resultados serão adicionados progressivamente durante a I.T.
+O pipeline experimental da C-NMC 2019 e o endpoint de classificação de LLA-B
+estão implementados. A persistência é independente por módulo. A integração do
+módulo renal e a interface React permanecem pendentes.

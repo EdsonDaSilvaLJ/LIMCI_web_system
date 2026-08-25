@@ -12,7 +12,11 @@ Integrar, em uma única aplicação acadêmica, dois modelos com tarefas diferen
 | Django Ninja | API HTTP, validação, persistência e roteamento |
 | Módulo renal | Segmentação de imagem renal com U-Net/VGG-19 |
 | Módulo LLA-B | Classificação de célula recortada com EfficientNet-B0 |
-| PostgreSQL | Metadados das análises e resultados estruturados |
+| PostgreSQL | Metadados e resultados próprios de cada módulo |
+
+Cada módulo mantém sua própria entidade de análise. Não existe uma tabela
+polimórfica central: o módulo de LLA-B usa `LeukemiaAnalysis`, enquanto o
+módulo renal terá `RenalAnalysis` quando sua integração for implementada.
 
 ## Limites da primeira entrega
 
@@ -29,5 +33,6 @@ Integrar, em uma única aplicação acadêmica, dois modelos com tarefas diferen
    `0–255`, pois a EfficientNet-B0 possui reescala interna;
 4. o modelo é carregado uma única vez por processo;
 5. o score de malignidade é comparado ao threshold configurado;
-6. o resultado e o tempo de inferência são registrados em `Analysis`;
+6. o resultado e o tempo de inferência são registrados em
+   `LeukemiaAnalysis`;
 7. a API retorna classe, scores e aviso de uso experimental.

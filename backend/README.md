@@ -8,15 +8,15 @@ API do protótipo construída com Django e Django Ninja.
 backend/
 ├── config/
 └── apps/
-    ├── analyses/
     ├── core/
     ├── leukemia/
     └── renal/
 ```
 
-O módulo de leucemia mantém separados seus schemas, pré-processamento,
-carregamento do modelo e inferência. O módulo renal está reservado para a
-integração posterior dos pesos da U-Net/VGG-19.
+O módulo de leucemia mantém separados seu modelo de persistência, schemas,
+pré-processamento, carregamento do modelo e inferência. O módulo renal está
+reservado para a integração posterior dos pesos da U-Net/VGG-19 e terá sua
+própria entidade de análise.
 
 ## Execução local
 

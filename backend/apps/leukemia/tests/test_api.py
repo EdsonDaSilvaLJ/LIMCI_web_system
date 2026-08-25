@@ -3,8 +3,8 @@ from unittest.mock import patch
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, override_settings
 
-from apps.analyses.models import Analysis
 from apps.leukemia.inference import LeukemiaPrediction
+from apps.leukemia.models import LeukemiaAnalysis
 
 
 @override_settings(MEDIA_ROOT="/tmp/limci-test-media")
@@ -34,7 +34,16 @@ class LeukemiaApiTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["predicted_class"], "malignant")
         self.assertEqual(response.json()["threshold"], 0.5)
-        self.assertEqual(Analysis.objects.count(), 1)
+        self.assertEqual(LeukemiaAnalysis.objects.count(), 1)
+
+        analysis = LeukemiaAnalysis.objects.get()
+        self.assertEqual(
+            analysis.predicted_class,
+            LeukemiaAnalysis.PredictedClass.MALIGNANT,
+        )
+        self.assertEqual(analysis.decision_threshold, 0.5)
+        self.assertEqual(analysis.original_width, 224)
+        self.assertTrue(analysis.input_image.name.startswith("leukemia/analyses/"))
 
     def test_predict_endpoint_requires_file(self):
         response = self.client.post("/api/v1/modules/leukemia/predict", {})
