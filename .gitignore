@@ -13,6 +13,9 @@ node_modules/
 dist/
 build/
 coverage/
+*.tsbuildinfo
+frontend/vite.config.js
+frontend/vite.config.d.ts
 
 # Ambientes e segredos
 .env

@@ -42,5 +42,6 @@ Datasets e pesos dos modelos não são armazenados neste repositório.
 ## Estado atual
 
 O pipeline experimental da C-NMC 2019 e o endpoint de classificação de LLA-B
-estão implementados. A persistência é independente por módulo. A integração do
-módulo renal e a interface React permanecem pendentes.
+estão implementados. A persistência é independente por módulo e a interface
+React já consome o módulo de leucemia. A integração do módulo renal permanece
+pendente.
