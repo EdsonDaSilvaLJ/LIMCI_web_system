@@ -1,0 +1,15 @@
+{
+  "task": "glomerular_semantic_segmentation",
+  "architecture": "unet_vgg19",
+  "input_size": [224, 224],
+  "input_channels": 3,
+  "color_mode": "RGB",
+  "resize_interpolation": "bilinear",
+  "normalization": "divide_by_255",
+  "output_channels": 1,
+  "output_activation": "sigmoid",
+  "decision_threshold": 0.5,
+  "operational_fold": 1,
+  "fold_selection": "provisional_not_performance_ranked",
+  "experimental": true
+}

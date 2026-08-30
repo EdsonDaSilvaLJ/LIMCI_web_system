@@ -41,7 +41,11 @@ Datasets e pesos dos modelos não são armazenados neste repositório.
 
 ## Estado atual
 
-O pipeline experimental da C-NMC 2019 e o endpoint de classificação de LLA-B
-estão implementados. A persistência é independente por módulo e a interface
-React já consome o módulo de leucemia. A integração do módulo renal permanece
-pendente.
+O pipeline experimental da C-NMC 2019 e os endpoints de classificação de
+LLA-B e segmentação renal estão implementados. A persistência é independente
+por módulo e a interface React consome ambos. O módulo renal depende da
+presença local do peso configurado e utiliza provisoriamente o fold 1.
+
+A metodologia da integração renal, a atribuição das contribuições e as
+limitações estão documentadas em [`docs/renal_integration.md`](docs/renal_integration.md).
+Há três amostras de teste funcional em [`docs/samples/renal/`](docs/samples/renal/).

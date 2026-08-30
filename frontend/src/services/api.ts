@@ -1,4 +1,8 @@
-import type { AnalysisModule, LeukemiaPrediction } from "../types";
+import type {
+  AnalysisModule,
+  LeukemiaPrediction,
+  RenalSegmentation,
+} from "../types";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "";
 
@@ -34,4 +38,28 @@ export async function classifyLeukemia(
   );
 
   return readJson<LeukemiaPrediction>(response);
+}
+
+function resolveMediaUrl(url: string) {
+  if (/^https?:\/\//.test(url) || !API_BASE_URL) return url;
+  return `${API_BASE_URL.replace(/\/$/, "")}/${url.replace(/^\//, "")}`;
+}
+
+export async function segmentRenalImage(
+  image: File,
+): Promise<RenalSegmentation> {
+  const body = new FormData();
+  body.append("file", image);
+
+  const response = await fetch(
+    `${API_BASE_URL}/api/v1/modules/renal/segment`,
+    { method: "POST", body },
+  );
+  const result = await readJson<RenalSegmentation>(response);
+
+  return {
+    ...result,
+    mask_url: resolveMediaUrl(result.mask_url),
+    overlay_url: resolveMediaUrl(result.overlay_url),
+  };
 }

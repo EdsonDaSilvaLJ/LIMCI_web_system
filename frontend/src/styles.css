@@ -112,6 +112,11 @@ h1, h2, h3 { font-family: "Manrope", sans-serif; margin-top: 0; }
 .result-details div { display: flex; justify-content: space-between; gap: 20px; padding: 7px 0; }
 .result-details dt { color: #6d7f7b; }
 .result-details dd { margin: 0; font-weight: 600; }
+.renal-result-panel { min-width: 0; }
+.renal-images { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+.renal-images figure { min-width: 0; margin: 0; padding: 8px; border: 1px solid #dce5dd; border-radius: 13px; background: #f5f8f5; }
+.renal-images img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 8px; background: #e9efea; }
+.renal-images figcaption { padding: 8px 3px 2px; color: #60716e; font-size: .78rem; font-weight: 600; text-align: center; }
 
 footer { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; padding: 22px; color: #5f706d; background: #e8eeea; font-size: .83rem; }
 footer strong { color: #465d59; }
@@ -124,4 +129,5 @@ footer strong { color: #465d59; }
   .section-heading { align-items: start; flex-direction: column; }
   .module-card { min-height: 300px; }
   .result-panel { min-height: 400px; }
+  .renal-images { grid-template-columns: 1fr; }
 }

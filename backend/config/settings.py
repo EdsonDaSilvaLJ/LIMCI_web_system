@@ -104,6 +104,19 @@ LEUKEMIA_INFERENCE_CONFIG_PATH = Path(
         ),
     )
 )
+RENAL_MODEL_PATH = Path(
+    config(
+        "RENAL_MODEL_PATH",
+        default=str(
+            BASE_DIR.parent
+            / "model_weights"
+            / "renal"
+            / "modelo_fold1.h5"
+        ),
+    )
+)
+RENAL_MODEL_FOLD = config("RENAL_MODEL_FOLD", default=1, cast=int)
+RENAL_THRESHOLD = config("RENAL_THRESHOLD", default=0.5, cast=float)
 MAX_IMAGE_UPLOAD_BYTES = (
     config("MAX_IMAGE_UPLOAD_MB", default=10, cast=int)
     * 1024

@@ -2,6 +2,7 @@ from ninja import NinjaAPI
 
 from apps.core.api import router as core_router
 from apps.leukemia.api import router as leukemia_router
+from apps.renal.api import router as renal_router
 
 
 api = NinjaAPI(
@@ -13,3 +14,4 @@ api = NinjaAPI(
 
 api.add_router("", core_router)
 api.add_router("/modules/leukemia", leukemia_router)
+api.add_router("/modules/renal", renal_router)

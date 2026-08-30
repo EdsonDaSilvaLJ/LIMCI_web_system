@@ -15,8 +15,8 @@ Integrar, em uma única aplicação acadêmica, dois modelos com tarefas diferen
 | PostgreSQL | Metadados e resultados próprios de cada módulo |
 
 Cada módulo mantém sua própria entidade de análise. Não existe uma tabela
-polimórfica central: o módulo de LLA-B usa `LeukemiaAnalysis`, enquanto o
-módulo renal terá `RenalAnalysis` quando sua integração for implementada.
+polimórfica central: o módulo de LLA-B usa `LeukemiaAnalysis` e o módulo renal
+usa `RenalAnalysis`.
 
 ## Limites da primeira entrega
 
@@ -36,3 +36,17 @@ módulo renal terá `RenalAnalysis` quando sua integração for implementada.
 6. o resultado e o tempo de inferência são registrados em
    `LeukemiaAnalysis`;
 7. a API retorna classe, scores e aviso de uso experimental.
+
+## Fluxo implementado para segmentação renal
+
+1. a API recebe um recorte histológico renal;
+2. o arquivo é validado, convertido para RGB e redimensionado para `224 x 224`;
+3. os pixels são convertidos para `float32` e divididos por 255;
+4. a U-Net/VGG-19 é reconstruída e o fold configurado é carregado uma única vez por processo;
+5. a saída probabilística é convertida em máscara binária com threshold 0,5;
+6. são gerados máscara PNG e overlay vermelho;
+7. entrada, artefatos e metadados são registrados em `RenalAnalysis`;
+8. a API retorna URLs, cobertura, fold e tempo de inferência.
+
+Os detalhes metodológicos e as limitações estão registrados em
+[`renal_integration.md`](renal_integration.md).

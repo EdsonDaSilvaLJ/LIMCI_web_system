@@ -1,0 +1,6 @@
+file,compatible,input_shape,output_shape,parameters
+fold_1/modelo_fold1.h5,true,"(None, 224, 224, 3)","(None, 224, 224, 1)",21505313
+fold_2/modelo_fold2.h5,true,"(None, 224, 224, 3)","(None, 224, 224, 1)",21505313
+fold_3/modelo_fold3.h5,true,"(None, 224, 224, 3)","(None, 224, 224, 1)",21505313
+fold_4/modelo_fold4.h5,true,"(None, 224, 224, 3)","(None, 224, 224, 1)",21505313
+fold_5/modelo_fold5.h5,true,"(None, 224, 224, 3)","(None, 224, 224, 1)",21505313

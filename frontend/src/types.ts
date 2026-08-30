@@ -17,3 +17,15 @@ export interface LeukemiaPrediction {
   inference_time_ms: number;
   experimental: boolean;
 }
+
+export interface RenalSegmentation {
+  analysis_id: string;
+  mask_url: string;
+  overlay_url: string;
+  mask_mean: number;
+  mask_coverage: number;
+  threshold: number;
+  fold: number;
+  inference_time_ms: number;
+  experimental: boolean;
+}

@@ -29,8 +29,12 @@ def list_modules(request):
             "slug": "renal",
             "name": "Segmentação renal",
             "task": "segmentation",
-            "status": "integration_pending",
-            "input_scope": "Imagem histológica renal ou região de interesse",
+            "status": (
+                "available"
+                if Path(settings.RENAL_MODEL_PATH).is_file()
+                else "integration_pending"
+            ),
+            "input_scope": "Recorte histológico renal com região glomerular",
         },
         {
             "slug": "leukemia",
