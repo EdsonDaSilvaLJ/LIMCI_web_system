@@ -108,10 +108,15 @@ function App() {
     <div className="app-shell">
       <header className="site-header">
         <a className="brand" href="#inicio" onClick={() => setActiveModule(null)}>
-          <span className="brand-mark" aria-hidden="true">LI</span>
-          <span><strong>LIMCI</strong><small>análise computacional de imagens</small></span>
+          <span className="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32"><path d="M8 7.5h5.5v17H8zM18.5 7.5H24v17h-5.5zM13.5 13.25h5v5.5h-5z" /></svg>
+          </span>
+          <span><strong>LIMCI</strong><small>apoio à análise anatomopatológica</small></span>
         </a>
-        <span className="research-badge">Iniciação Tecnológica · UFPI</span>
+        <div className="header-meta">
+          <span className="header-status"><i />Sistema experimental</span>
+          <span className="research-badge">Iniciação Tecnológica · UFPI</span>
+        </div>
       </header>
 
       <main id="inicio">
@@ -128,8 +133,8 @@ function App() {
               ← Voltar aos módulos
             </button>
             <div className="analysis-heading">
-              <p className="eyebrow">{renalActive ? "SEGMENTAÇÃO · GLOMÉRULO" : "CLASSIFICAÇÃO · LLA-B"}</p>
-              <h1>{renalActive ? "Segmentação de estrutura renal" : "Análise de célula sanguínea"}</h1>
+              <p className="eyebrow">{renalActive ? "MÓDULO RIM · SEGMENTAÇÃO" : "MÓDULO LEUCEMIA LLA-B · CLASSIFICAÇÃO"}</p>
+              <h1>{renalActive ? "Módulo Rim" : "Módulo Leucemia LLA-B"}</h1>
               <p>{renalActive
                 ? "Envie um recorte histológico renal contendo uma região glomerular."
                 : "Envie uma imagem de uma única célula, já recortada da lâmina."}</p>
@@ -162,7 +167,7 @@ function App() {
                 )}
                 {error && <p className="inline-error" role="alert">{error}</p>}
                 <button className="primary-button analyze-button" type="button" disabled={!file || isSubmitting} onClick={submitAnalysis}>
-                  {isSubmitting ? "Processando…" : "Executar análise experimental"}
+                  {isSubmitting ? "Processando…" : "Processar imagem"}
                 </button>
               </div>
 
@@ -191,29 +196,41 @@ function ModulesPage({ modulesError, leukemiaAvailable, renalAvailable, onSelect
   return (
     <>
       <section className="hero">
-        <p className="eyebrow">PLATAFORMA EXPERIMENTAL MODULAR</p>
-        <h1>Modelos de visão computacional em uma interface acessível.</h1>
-        <p className="hero-copy">Uma prova de conceito para integrar tarefas distintas de análise de imagens patológicas sem misturar seus dados e resultados.</p>
+        <div className="hero-content">
+          <p className="eyebrow">PLATAFORMA EXPERIMENTAL · LIMCI</p>
+          <h1>Aplicação LIMCI</h1>
+          <p className="hero-subtitle">Sistema de Apoio a Patologistas por Meio da Análise Automatizada de Imagens</p>
+          <p className="hero-copy">Recursos computacionais organizados em módulos especializados para apoiar a avaliação de imagens anatomopatológicas.</p>
+          <a className="hero-link" href="#modulos">Conhecer os módulos <span aria-hidden="true">↓</span></a>
+        </div>
+        <div className="hero-visual" aria-hidden="true">
+          <div className="visual-grid" />
+          <div className="sample sample-one"><span /></div>
+          <div className="sample sample-two"><span /><i /></div>
+          <div className="focus-ring"><span>2</span><small>módulos<br />especializados</small></div>
+          <span className="visual-caption">IMAGEM · ESTRUTURA · EVIDÊNCIA</span>
+        </div>
       </section>
-      <section className="modules-section" aria-labelledby="modules-title">
+      <section className="modules-section" id="modulos" aria-labelledby="modules-title">
         <div className="section-heading">
-          <div><p className="eyebrow">MÓDULOS</p><h2 id="modules-title">Escolha uma análise</h2></div>
+          <div><p className="eyebrow">ÁREAS DE PROCESSAMENTO</p><h2 id="modules-title">Escolha um módulo</h2><p>Selecione a área correspondente ao tipo de imagem que deseja processar.</p></div>
           <span className="api-state"><i className={modulesError ? "offline" : "online"} />{modulesError ? "API indisponível" : "API conectada"}</span>
         </div>
         {modulesError && <p className="inline-error">{modulesError}</p>}
         <div className="module-grid">
-          <ModuleCard icon="●" iconClass="blood-icon" task="CLASSIFICAÇÃO" available={leukemiaAvailable} title="Leucemia LLA-B" description="Classificação binária de uma célula sanguínea previamente recortada em normal ou maligna." onClick={() => onSelect("leukemia")} />
-          <ModuleCard icon="◒" iconClass="renal-icon" task="SEGMENTAÇÃO" available={renalAvailable} title="Estruturas renais" description="Segmentação glomerular com U-Net/VGG-19 para geração de máscara e sobreposição." onClick={() => onSelect("renal")} />
+          <ModuleCard icon="blood" iconClass="blood-icon" task="CLASSIFICAÇÃO CELULAR" number="01" available={leukemiaAvailable} title="Módulo Leucemia LLA-B" description="Classificação binária de uma célula sanguínea previamente recortada em padrão normal ou maligno." onClick={() => onSelect("leukemia")} />
+          <ModuleCard icon="renal" iconClass="renal-icon" task="SEGMENTAÇÃO GLOMERULAR" number="02" available={renalAvailable} title="Módulo Rim" description="Segmentação de estruturas glomerulares com geração de máscara binária e imagem de sobreposição." onClick={() => onSelect("renal")} />
         </div>
       </section>
     </>
   );
 }
 
-function ModuleCard({ icon, iconClass, task, available, title, description, onClick }: {
-  icon: string;
+function ModuleCard({ icon, iconClass, task, number, available, title, description, onClick }: {
+  icon: "blood" | "renal";
   iconClass: string;
   task: string;
+  number: string;
   available: boolean;
   title: string;
   description: string;
@@ -221,14 +238,24 @@ function ModuleCard({ icon, iconClass, task, available, title, description, onCl
 }) {
   return (
     <article className={`module-card ${available ? "available-card" : "pending-card"}`}>
-      <div className={`module-icon ${iconClass}`} aria-hidden="true">{icon}</div>
-      <div className="module-meta"><span>{task}</span><span className={`status ${available ? "available" : "pending"}`}>{available ? "Disponível" : "Modelo ausente"}</span></div>
+      <div className="card-top">
+        <div className={`module-icon ${iconClass}`} aria-hidden="true"><ModuleIcon type={icon} /></div>
+        <span className="module-number">{number}</span>
+      </div>
+      <div className="module-meta"><span>{task}</span><span className={`status ${available ? "available" : "pending"}`}><i />{available ? "Disponível" : "Modelo ausente"}</span></div>
       <h3>{title}</h3><p>{description}</p>
       <button className={available ? "primary-button" : "secondary-button"} type="button" disabled={!available} onClick={onClick}>
-        {available ? <>Iniciar análise <span aria-hidden="true">→</span></> : "Integração indisponível"}
+        {available ? <>Acessar módulo <span aria-hidden="true">→</span></> : "Integração indisponível"}
       </button>
     </article>
   );
+}
+
+function ModuleIcon({ type }: { type: "blood" | "renal" }) {
+  if (type === "blood") {
+    return <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="14" /><circle className="icon-detail" cx="24" cy="24" r="6" /><path d="M15 11l-3-3m21 29 3 3M37 15l3-3M11 33l-3 3" /></svg>;
+  }
+  return <svg viewBox="0 0 48 48"><path d="M25.5 8.5C16.8 8.5 11 15.4 11 24.6c0 8.8 4.9 14.9 11.5 14.9 4.8 0 7-3.4 7-7.2 0-3.5-2-6.6-2-10.2 0-4 2.1-6.6 5.8-7.6-1.9-3.7-4.5-6-7.8-6Z" /><path className="icon-detail" d="M33.2 14.5c3.5.2 5.8 3.3 5.8 7.5 0 4.8-2.4 8.3-6.3 9.9M18 20c2.8 1.1 4.8 3.8 4.8 7" /></svg>;
 }
 
 function LeukemiaResultPanel({ result, onReset }: { result: LeukemiaPrediction | null; onReset: () => void }) {
